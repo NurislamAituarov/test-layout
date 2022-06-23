@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import cn from 'classnames';
 import './Main.scss';
@@ -10,7 +10,8 @@ import { Btn } from '../Btn';
 const filter_list = ['Show All', 'Design', 'Branding', 'Illustration', 'Motion'];
 
 export function Main() {
-  const { arrCards } = useSelector((state) => state.reducer);
+  const { arrCards, filter } = useSelector((state) => state.reducer);
+  const [cards, setCards] = useState(arrCards);
   const [activeFilterList, setActiveFilterList] = useState('Show All');
   const [activeCard, setActiveCard] = useState(null);
   const [index, setIndex] = useState({
@@ -19,6 +20,17 @@ export function Main() {
   });
   const dispatch = useDispatch();
   const refCard = useRef([]);
+
+  useEffect(() => {
+    setCards(arrCards);
+  }, [arrCards]);
+
+  const filterCards = () => {
+    if (filter === 'Show All') return arrCards;
+    return cards.filter((el) => {
+      return el.category === filter;
+    });
+  };
 
   function onFilter(el) {
     setActiveFilterList(el);
@@ -54,21 +66,23 @@ export function Main() {
       </div>
 
       <div className="wrapper__cards">
-        {arrCards.slice(0, index.indexEndCard).map((el, i) => {
-          return (
-            <Card
-              key={el.id}
-              el={el}
-              onSelectCard={onSelectCard}
-              refCard={refCard}
-              activeCard={activeCard}
-              onFilter={onFilter}
-            />
-          );
-        })}
+        {filterCards()
+          .slice(0, index.indexEndCard)
+          .map((el, i) => {
+            return (
+              <Card
+                key={el.id}
+                el={el}
+                onSelectCard={onSelectCard}
+                refCard={refCard}
+                activeCard={activeCard}
+                onFilter={onFilter}
+              />
+            );
+          })}
       </div>
 
-      {index.indexEndCard < arrCards.length && (
+      {index.indexEndCard < cards.length && (
         <Btn click={onLoadMore} title="load more" more={true} />
       )}
     </main>

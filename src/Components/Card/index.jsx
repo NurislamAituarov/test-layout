@@ -19,7 +19,7 @@ export function Card({ el, onSelectCard, refCard, activeCard, onFilter }) {
       tabIndex="0"
       onClick={() => onSelectCard(el.id)}
       key={el.id}
-      className={cn('cards__item', { 'cards__item-active': activeCard === el.id })}>
+      className={cn('cards__item anim-card', { 'cards__item-active': activeCard === el.id })}>
       <img src={el.img} alt="" height={300} />
       <div className="cards__item-title">
         <p

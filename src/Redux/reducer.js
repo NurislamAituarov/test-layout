@@ -2,20 +2,15 @@ import { arr } from '../FakeBD';
 
 const initialState = {
   arrCards: arr,
+  filter: 'Show All',
 };
 
 export const reducer = (state = initialState, action) => {
   switch (action.type) {
     case 'SELECTED_CATEGORY':
-      const filterCards = () => {
-        if (action.payload === 'Show All') return arr;
-        return arr.filter((el) => {
-          return el.category === action.payload;
-        });
-      };
       return {
         ...state,
-        arrCards: filterCards(),
+        filter: action.payload,
       };
     case 'DELETED_CARD':
       return {
