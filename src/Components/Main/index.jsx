@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import cn from 'classnames';
 import './Main.scss';
@@ -17,21 +17,8 @@ export function Main() {
     indexEndCard: 9,
     indexCard: 1,
   });
-
   const dispatch = useDispatch();
   const refCard = useRef([]);
-
-  useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (!refCard.current[index.indexCard].contains(event.target)) {
-        setActiveCard(null);
-      }
-    };
-    document.addEventListener('click', handleClickOutside, true);
-    return () => {
-      document.removeEventListener('click', handleClickOutside, true);
-    };
-  }, [index.indexCard]);
 
   function onFilter(el) {
     setActiveFilterList(el);
