@@ -1,0 +1,18 @@
+.header__nav {
+  ul {
+    gap: 60px;
+    li {
+      cursor: pointer;
+      &:hover {
+        transition: 0.3s;
+        color: #00fa00;
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .header__nav {
+    // display: none;
+  }
+}

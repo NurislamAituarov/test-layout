@@ -1,0 +1,39 @@
+.btn {
+  padding: 16px 40px;
+  border-radius: 4px;
+  border: 1px solid rgb(181, 181, 181);
+  text-transform: uppercase;
+  background: none;
+  font-size: 12px;
+  transition: all 0.3s;
+  letter-spacing: 1px;
+  outline: none;
+  &:hover,
+  &:focus {
+    border: 1px solid white;
+  }
+  &:active {
+    border: 1px solid #00fa00;
+  }
+}
+
+.btn-more {
+  display: block;
+  margin: 20px auto;
+  background: white;
+  color: black;
+  border: none;
+  box-shadow: 0px 0px 12px -3px rgb(174, 174, 174);
+
+  &:hover,
+  &:focus {
+    border: none;
+    box-shadow: 0px 0px 12px -1px rgb(140, 140, 140);
+  }
+}
+
+@media (max-width: 415px) {
+  .btn {
+    padding: 10px 20px;
+  }
+}
